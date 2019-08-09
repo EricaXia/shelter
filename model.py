@@ -27,7 +27,7 @@ preprocessor = ColumnTransformer(
 # MODELING
 # full prediction pipeline
 clf = Pipeline(steps=[('preprocessor', preprocessor),
-                      ('classifier', LogisticRegression(solver='liblinear', max_iter = 500))])
+                      ('classifier', LogisticRegression(solver='newton-cg', max_iter = 500))])
 
 X = pet_data[["Age", "Type", "Sex", "Size", "Intake Condition", "First_Color", "Second_Color", "First Breed", "Second Breed"]]
 y = pet_data['Outcome Type']
