@@ -1,0 +1,228 @@
+<html>
+<head>
+<style>
+
+form {
+  margin: 0 auto;
+  width: 500px;
+  padding: 1em;
+  border: 2px solid #CCC;
+  border-radius: 1em;
+  background-color: #FFFFFF;
+}
+
+form div + div {
+  margin-top: 1em;
+}
+
+input, textarea {
+  /* To make sure that all text fields have the same font settings
+     By default, textareas have a monospace font */
+  font: 1em sans-serif;
+
+  /* To give the same size to all text fields */
+  width: 300px;
+  box-sizing: border-box;
+
+  /* To harmonize the look & feel of text field border */
+  border: 1px solid #999;
+}
+
+input:focus, textarea:focus {
+  /* To give a little highlight on active elements */
+  border-color: #000;
+}
+
+.center {
+  text-align: center;
+  background-color: #FFFFFF;
+  padding-top: 0.2%;;
+  padding-bottom: 1%;;
+}
+
+textarea {
+  /* To properly align multiline text fields with their labels */
+  vertical-align: top;
+
+  /* To give enough room to type some text */
+  height: 5em;
+}
+
+.button {
+  /* To position the buttons to the same position of the text fields */
+  padding-left: 90px; /* same size as the label elements */
+}
+
+button {
+  /* This extra margin represent roughly the same space as the space
+     between the labels and their text fields */
+  margin-left: .5em;
+}
+
+body {
+  background-image: url("https://github.com/EricaXia/shelter/raw/master/imgs/shelter-cats.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.align1 {
+     width: 90%;
+     float: right;
+
+}
+
+</style>
+</head>
+<body>
+ <div class="center">
+    <h1>Animal Shelter Adoption Prediction</h1>
+    <p>How likely is an animal to be adopted? A model trained on real animal shelter data can help predict those chances.
+    <br>
+   </div>
+    
+   <p>&nbsp;&nbsp;&nbsp;</p>
+
+<div>
+  <form action="/result" method="POST">
+<div>
+    <label for="age">Age</label>
+    <input type="text" id="age" name="age">
+    <br>
+
+    <label for="Type">Type</label>
+    <select id="Type" name="Type" class="dropdown">
+      <option value="CAT">Cat</option>
+      <option value="DOG">Dog</option>
+    </select>
+    <br>
+      
+    <label for="Sex">Sex</label>
+    <select id="Sex" name="Sex">
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Unknown">Unknown</option>
+    </select>
+    <br>
+    
+    <label for="Size">Size</label>
+    <select id="Size" name="Size">
+      <option value="KITTN OR PUPPY">Kitten or Puppy</option>
+      <option value="TOY">Toy</option>
+      <option value="SMALL">Small</option>
+      <option value="MED">Medium</option>
+      <option value="LARGE">Large</option>
+      <option value="X-LRG">X-Large</option> 
+    </select>
+    <br>
+    
+    <label for="Intake Condition">Intake Condition</label>
+    <select id="Intake Condition" name="Intake Condition">
+      <option value="HEALTHY">Healthy</option>
+      <option value="TREATABLE/REHAB">Treatable/Rehab</option>
+      <option value="TREATABLE/MANAGEABLE">Treatable/Manageable</option>
+      <option value="UNTREATABLE">Untreatable</option>
+    </select>
+    <br>
+    
+    <label for="First_Color">First Color</label>
+    <select id="First_Color" name="First_Color">
+      <option value="BLACK">Black</option>
+      <option value="BLUE">Blue</option>
+      <option value="BRN TABBY">Brown Tabby</option>
+      <option value="BROWN">Brown</option>
+      <option value="CALICO">Calico</option>
+      <option value="GRAY">Gray</option>
+      <option value="GRAY TABBY">Gray Tabby</option>
+      <option value="LYNX PT">Lynx Pt</option>
+      <option value="ORG TABBY">Orange Tabby</option>
+      <option value="TAN">Tan</option>
+      <option value="TORTIE">Tortie</option>
+      <option value="TRICOLOR">Tricolor</option>
+      <option value="WHITE">White</option>
+      <option value="Other">Other</option>
+    </select>
+    <br>
+    
+    <label for="Second_Color">Second Color (if mixed)</label>
+    <select id="Second_Color" name="Second_Color">
+      <option value=nan>   </option>
+      <option value="BLACK">Black</option>
+      <option value="BLUE">Blue</option>
+      <option value="BRN TABBY">Brown Tabby</option>
+      <option value="BROWN">Brown</option>
+      <option value="GRAY">Gray</option>
+      <option value="TAN">Tan</option>
+      <option value="Other">Other</option>
+    </select>
+    <br>
+    
+    <label for="FirstBreed">First Breed</label>
+    <select id="FirstBreed" name="FirstBreed" class="dropdown">
+      <option class = "TypeCAT " value="DOMESTIC LH">(Cat) DOMESTIC LH</option>
+      <option class = "TypeCAT " value="DOMESTIC MH">(Cat) DOMESTIC MH</option>
+      <option class = "TypeCAT " value="DOMESTIC SH">(Cat) DOMESTIC SH</option>
+      <option class = "TypeCAT " value="SIAMESE">(Cat) SIAMESE</option>
+      <option class = "TypeDOG " value="ALASKAN HUSKY">ALASKAN HUSKY</option>
+      <option class = "TypeDOG " value="AUST CATTLE DOG">AUST CATTLE DOG</option>
+      <option class = "TypeDOG " value="AUST KELPIE">AUST KELPIE</option>
+      <option class = "TypeDOG " value="AUST SHEPHERD">AUST SHEPHERD</option>
+      <option class = "TypeDOG " value="BEAGLE">BEAGLE</option>
+      <option class = "TypeDOG " value="BORDER COLLIE">BORDER COLLIE</option>
+      <option class = "TypeDOG " value="BOXER">BOXER</option>
+      <option class = "TypeDOG " value="CAIRN TERRIER">CAIRN TERRIER</option>
+      <option class = "TypeDOG " value="CATAHOULA">CATAHOULA</option>
+      <option class = "TypeDOG " value="CHIHUAHUA LH">CHIHUAHUA LH</option>
+      <option class = "TypeDOG " value="CHIHUAHUA SH">CHIHUAHUA SH</option>
+      <option class = "TypeDOG " value="DACHSHUND">DACHSHUND</option>
+      <option class = "TypeDOG " value="DOBERMAN PINSCH">DOBERMAN PINSCH</option>
+      <option class = "TypeDOG " value="GERM SHEPHERD">GERM SHEPHERD</option>
+      <option class = "TypeDOG " value="LABRADOR RETR">LABRADOR RETR</option>
+      <option class = "TypeDOG " value="MALTESE">MALTESE</option>
+      <option class = "TypeDOG " value="MIN PINSCHER">MIN PINSCHER</option>
+      <option class = "TypeDOG " value="MIX">MIX</option>
+      <option class = "TypeDOG " value="Other">Other</option>
+      <option class = "TypeDOG " value="PARSON RUSS TER">PARSON RUSS TER</option>
+      <option class = "TypeDOG " value="PIT BULL">PIT BULL</option>
+      <option class = "TypeDOG " value="POMERANIAN">POMERANIAN</option>
+      <option class = "TypeDOG " value="POODLE MIN">POODLE MIN</option>
+      <option class = "TypeDOG " value="QUEENSLAND HEEL">QUEENSLAND HEEL</option>
+      <option class = "TypeDOG " value="RAT TERRIER">RAT TERRIER</option>
+      <option class = "TypeDOG " value="ROTTWEILER">ROTTWEILER</option>
+      <option class = "TypeDOG " value="SCHNAUZER MIN">SCHNAUZER MIN</option>
+      <option class = "TypeDOG " value="SHIH TZU">SHIH TZU</option>
+      <option class = "TypeDOG " value="SIBERIAN HUSKY">SIBERIAN HUSKY</option>
+      <option class = "TypeDOG " value="YORKSHIRE TERR">YORKSHIRE TERR</option>
+    </select>
+    <br>
+    
+    <label for="Second Breed">Second Breed (mixed dogs only)</label>
+    <select id="Second Breed" name="Second Breed">
+      <option value=nan>   </option>
+      <option value="ALASKAN HUSKY">ALASKAN HUSKY</option>
+      <option value="AUST CATTLE DOG">AUST CATTLE DOG</option>
+      <option value="AUST KELPIE">AUST KELPIE</option>
+      <option value="AUST SHEPHERD">AUST SHEPHERD</option>
+      <option value="BEAGLE">BEAGLE</option>
+      <option value="BORDER COLLIE">BORDER COLLIE</option>
+      <option value="BOXER">BOXER</option>
+      <option value="CAIRN TERRIER">CAIRN TERRIER</option>
+      <option value="CATAHOULA">CATAHOULA</option>
+      <option value="CHIHUAHUA LH">CHIHUAHUA LH</option>
+      <option value="CHIHUAHUA SH">CHIHUAHUA SH</option>
+      <option value="DACHSHUND">DACHSHUND</option>
+      <option value="DOBERMAN PINSCH">DOBERMAN PINSCH</option>
+      <option value="GERM SHEPHERD">GERM SHEPHERD</option>
+      <option value="LABRADOR RETR">LABRADOR RETR</option>
+      <option value="MALTESE">MALTESE</option>
+      <option value="MIX">MIX</option>
+      <option value="Other">Other</option>
+    </select>
+      <br>
+      <br>
+      
+    <input type="submit" value="Submit">
+  </div>
+  </form>
+</div>
+</body>
+</html>

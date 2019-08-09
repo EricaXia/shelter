@@ -1,0 +1,281 @@
+<html>
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style type="text/css">
+
+.form-style-5{
+	max-width: 500px;
+	padding: 10px 20px;
+	background: #f4f7f8;
+	margin: 10px auto;
+	padding: 20px;
+	background: #f4f7f8;
+	border-radius: 8px;
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+.form-style-5 fieldset{
+	border: none;
+}
+.form-style-5 legend {
+	font-size: 1.4em;
+	margin-bottom: 10px;
+}
+.form-style-5 label {
+	display: block;
+	margin-bottom: 6px;
+}
+
+.form-style-5 input[type="text"],
+.form-style-5 textarea,
+
+.form-style-5 select {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	background: rgba(255,255,255,.1);
+	border: none;
+	border-radius: 4px;
+	font-size: 13px;
+	margin: 0;
+	outline: 0;
+	padding: 10px;
+	width: 100%;
+	box-sizing: border-box; 
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box; 
+	background-color: #e8eeef;
+	color:#000000;
+	-webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+	box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+	margin-bottom: 10px;
+}
+.form-style-5 input[type="text"]:focus,
+.form-style-5 textarea:focus,
+.form-style-5 select:focus{
+	background: #d2d9dd;
+}
+.form-style-5 select{
+	-webkit-appearance: menulist-button;
+	height:35px;
+}
+.form-style-5 .number {
+	background: #1abc9c;
+	color: #fff;
+	height: 30px;
+	width: 30px;
+	display: inline-block;
+	font-size: 0.8em;
+	margin-right: 4px;
+	line-height: 30px;
+	text-align: center;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+	border-radius: 15px 15px 15px 0px;
+}
+
+.form-style-5 input[type="submit"],
+.form-style-5 input[type="button"]
+{
+	position: relative;
+	display: block;
+	padding: 19px 39px 18px 39px;
+	color: #FFF;
+	margin: 0 auto;
+	background: #1abc9c;
+	font-size: 24px;
+	text-align: center;
+	font-style: normal;
+	width: 100%;
+	border: 1px solid #16a085;
+	border-width: 1px 1px 3px;
+	margin-bottom: 10px;
+}
+
+.form-style-5 input[type="submit"]:hover,
+.form-style-5 input[type="button"]:hover
+{
+	background: #109177;
+}
+
+html,body {
+ height:100%;width:100% 
+ }  
+
+body {
+  background-image: url("https://github.com/EricaXia/shelter/raw/master/imgs/shelter-cats.jpg");
+  background-position: center center;
+  background-repeat: repeat-y;
+  background-attachment: fixed;
+  background-size: cover;
+  
+}
+
+@media screen and (max-width:800px) {
+  body {
+    background-size: cover;
+    background-attachment: fixed }
+}
+
+.footer {
+  position: absolute;
+  width: 150px;
+  padding: 0px;
+  bottom: 8px;
+  right: 16px;
+  border: 2px solid #73AD21;
+  background-color: white;
+  color: black;
+  text-align: center;
+  margin:  0 auto;
+}
+    
+</style>
+</head>
+<body>
+<div class="form-style-5">
+<form action="/result" method="POST">
+<fieldset>
+<legend>Animal Shelter Adoption Prediction</legend>
+<p>How likely is an animal to be adopted? A machine learning algorithm trained on real shelter data tries to predict these chances.</p>
+    <hr />
+    <label for="Type">Type</label>
+    <input type="radio" id="Type" name="Type" value="CAT"> Cat<br>
+    <input type="radio" name="Type" value="DOG"> Dog
+    <br>
+    <br>
+    
+    <label for="Sex">Sex</label>
+    <select id="Sex" name="Sex">
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Unknown">Unknown</option>
+    </select>
+    <br>
+    
+    <label for="Size">Size</label>
+    <select id="Size" name="Size">
+      <option value="KITTN OR PUPPY">Kitten or Puppy</option>
+      <option value="TOY">Toy</option>
+      <option value="SMALL">Small</option>
+      <option value="MED">Medium</option>
+      <option value="LARGE">Large</option>
+      <option value="X-LRG">X-Large</option> 
+    </select>
+    <br>
+    
+    <label for="Intake Condition">Intake Condition</label>
+    <select id="Intake Condition" name="Intake Condition">
+      <option value="HEALTHY">Healthy</option>
+      <option value="TREATABLE/REHAB">Treatable/Rehab</option>
+      <option value="TREATABLE/MANAGEABLE">Treatable/Manageable</option>
+      <option value="UNTREATABLE">Untreatable</option>
+    </select>
+    <br>
+    
+    <label for="First_Color">First Color</label>
+    <select id="First_Color" name="First_Color">
+      <option value="BLACK">Black</option>
+      <option value="BLUE">Blue</option>
+      <option value="BRN TABBY">Brown Tabby</option>
+      <option value="BROWN">Brown</option>
+      <option value="CALICO">Calico</option>
+      <option value="GRAY">Gray</option>
+      <option value="GRAY TABBY">Gray Tabby</option>
+      <option value="LYNX PT">Lynx Pt</option>
+      <option value="ORG TABBY">Orange Tabby</option>
+      <option value="TAN">Tan</option>
+      <option value="TORTIE">Tortie</option>
+      <option value="TRICOLOR">Tricolor</option>
+      <option value="WHITE">White</option>
+      <option value="Other">Other</option>
+    </select>
+    <br>
+    
+    <label for="Second_Color">Second Color (if mixed)</label>
+    <select id="Second_Color" name="Second_Color">
+      <option value=nan>   </option>
+      <option value="BLACK">Black</option>
+      <option value="BLUE">Blue</option>
+      <option value="BRN TABBY">Brown Tabby</option>
+      <option value="BROWN">Brown</option>
+      <option value="GRAY">Gray</option>
+      <option value="TAN">Tan</option>
+      <option value="Other">Other</option>
+    </select>
+    <br>
+    
+    <label for="First Breed">First Breed</label>
+    <select id="First Breed" name="First Breed" class="dropdown">
+      <option class = "TypeCAT " value="DOMESTIC LH">(Cat) DOMESTIC LH</option>
+      <option class = "TypeCAT " value="DOMESTIC MH">(Cat) DOMESTIC MH</option>
+      <option class = "TypeCAT " value="DOMESTIC SH">(Cat) DOMESTIC SH</option>
+      <option class = "TypeCAT " value="SIAMESE">(Cat) SIAMESE</option>
+      <option class = "TypeDOG " value="ALASKAN HUSKY">ALASKAN HUSKY</option>
+      <option class = "TypeDOG " value="AUST CATTLE DOG">AUST CATTLE DOG</option>
+      <option class = "TypeDOG " value="AUST KELPIE">AUST KELPIE</option>
+      <option class = "TypeDOG " value="AUST SHEPHERD">AUST SHEPHERD</option>
+      <option class = "TypeDOG " value="BEAGLE">BEAGLE</option>
+      <option class = "TypeDOG " value="BORDER COLLIE">BORDER COLLIE</option>
+      <option class = "TypeDOG " value="BOXER">BOXER</option>
+      <option class = "TypeDOG " value="CAIRN TERRIER">CAIRN TERRIER</option>
+      <option class = "TypeDOG " value="CATAHOULA">CATAHOULA</option>
+      <option class = "TypeDOG " value="CHIHUAHUA LH">CHIHUAHUA LH</option>
+      <option class = "TypeDOG " value="CHIHUAHUA SH">CHIHUAHUA SH</option>
+      <option class = "TypeDOG " value="DACHSHUND">DACHSHUND</option>
+      <option class = "TypeDOG " value="DOBERMAN PINSCH">DOBERMAN PINSCH</option>
+      <option class = "TypeDOG " value="GERM SHEPHERD">GERM SHEPHERD</option>
+      <option class = "TypeDOG " value="LABRADOR RETR">LABRADOR RETR</option>
+      <option class = "TypeDOG " value="MALTESE">MALTESE</option>
+      <option class = "TypeDOG " value="MIN PINSCHER">MIN PINSCHER</option>
+      <option class = "TypeDOG " value="MIX">MIX</option>
+      <option class = "TypeDOG " value="Other">Other</option>
+      <option class = "TypeDOG " value="PARSON RUSS TER">PARSON RUSS TER</option>
+      <option class = "TypeDOG " value="PIT BULL">PIT BULL</option>
+      <option class = "TypeDOG " value="POMERANIAN">POMERANIAN</option>
+      <option class = "TypeDOG " value="POODLE MIN">POODLE MIN</option>
+      <option class = "TypeDOG " value="QUEENSLAND HEEL">QUEENSLAND HEEL</option>
+      <option class = "TypeDOG " value="RAT TERRIER">RAT TERRIER</option>
+      <option class = "TypeDOG " value="ROTTWEILER">ROTTWEILER</option>
+      <option class = "TypeDOG " value="SCHNAUZER MIN">SCHNAUZER MIN</option>
+      <option class = "TypeDOG " value="SHIH TZU">SHIH TZU</option>
+      <option class = "TypeDOG " value="SIBERIAN HUSKY">SIBERIAN HUSKY</option>
+      <option class = "TypeDOG " value="YORKSHIRE TERR">YORKSHIRE TERR</option>
+    </select>
+    <br>
+    
+    <label for="Second Breed">Second Breed (mixed dogs only)</label>
+    <select id="Second Breed" name="Second Breed">
+      <option value=nan>   </option>
+      <option value="ALASKAN HUSKY">ALASKAN HUSKY</option>
+      <option value="AUST CATTLE DOG">AUST CATTLE DOG</option>
+      <option value="AUST KELPIE">AUST KELPIE</option>
+      <option value="AUST SHEPHERD">AUST SHEPHERD</option>
+      <option value="BEAGLE">BEAGLE</option>
+      <option value="BORDER COLLIE">BORDER COLLIE</option>
+      <option value="BOXER">BOXER</option>
+      <option value="CAIRN TERRIER">CAIRN TERRIER</option>
+      <option value="CATAHOULA">CATAHOULA</option>
+      <option value="CHIHUAHUA LH">CHIHUAHUA LH</option>
+      <option value="CHIHUAHUA SH">CHIHUAHUA SH</option>
+      <option value="DACHSHUND">DACHSHUND</option>
+      <option value="DOBERMAN PINSCH">DOBERMAN PINSCH</option>
+      <option value="GERM SHEPHERD">GERM SHEPHERD</option>
+      <option value="LABRADOR RETR">LABRADOR RETR</option>
+      <option value="MALTESE">MALTESE</option>
+      <option value="MIX">MIX</option>
+      <option value="Other">Other</option>
+    </select>
+      <br>
+    <label for="age">Age</label>
+    <input type="text" id="age" name="age">
+    <br>
+    </fieldset>
+    <input type="submit" value="Submit">
+  </form>
+</div>
+<div class="footer">
+  <p>Erica Xia 2019</p>
+</div>
+</body>
+</html>
