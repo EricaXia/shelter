@@ -24,10 +24,10 @@ from sklearn.model_selection import train_test_split
 
 # open and preprocess data
 pet_data = pd.read_csv('cleaned_df.csv')
-
+pet_data.shape
 print(pet_data.head())
 
-pet_data['Outcome Type'].value_counts(normalize=True) # approx 60% animals get adopted
+pet_data['Outcome Type'].groupby(pet_data["Type"]).value_counts(normalize=True) # approx 60% animals get adopted
 
 # df for only euthanized pets
 euthanized = pet_data[pet_data['Outcome Type'] == "EUTHANIZE"]
@@ -38,7 +38,6 @@ euthanized["Type"].value_counts(normalize=True)
 # about 62% untreatable get euth
 # shockingly, 20% euth were still healthy animals (455 in number)
 euthanized["Intake Condition"].value_counts(normalize=True)
-
 euthanized[euthanized["Intake Condition"] == "HEALTHY"].shape
 
 
@@ -88,16 +87,17 @@ coef.reset_index(inplace=True)
 coef.shape
 
 # Draw plot
-plt.figure(figsize=(12,12), dpi= 80)
+plt.figure(figsize=(10,8), dpi= 80)
 plt.hlines(y=coef.index, xmin=0, xmax=coef.coef_z)
 for x, y, tex in zip(coef.coef_z, coef.index, coef.coef_z):
     t = plt.text(x, y, round(tex, 2), 
     horizontalalignment='right' if x < 0 else 'left', verticalalignment='center', fontdict={'color':'red' if x < 0 else 'green', 'size':14})
 
 # Decorations    
-plt.yticks(coef.index, coef.features, fontsize=12)
-plt.title('Most Impactful Coefficients on Adoption Outcome', fontdict={'size':20})
+plt.yticks(coef.index, coef.features, fontsize=11)
+plt.title('Most Impactful Coefficients on Adoption Outcome', fontdict={'size':14})
 plt.grid(linestyle='--', alpha=0.5)
-plt.xlim(-2.5, 2.5)
+plt.xlim(-6, 3.3)
+plt.savefig("eda_last.png", bbox_inches='tight')
 plt.show()
 
