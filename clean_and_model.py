@@ -1,21 +1,34 @@
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-import matplotlib.pyplot as plt
+import os
+import os.path
+import sys
+from scipy import stats
 
-orig_pet_data = pd.read_csv('pet_data.csv')
+absFilePath = os.path.join(os.path.dirname('__file__'))
+print(absFilePath)
+path = os.path.join(absFilePath, r"Data\sonoma_shelter_intake_outcome.csv")
+orig_pet_data = pd.read_csv(path)
 orig_pet_data.count()
 orig_pet_data.shape
-# originally 12,327 observations
+# originally 17000 observations
 
-pet_data = pd.read_csv('pet_data.csv')
+# data frame to experiment with
+pet_data = pd.read_csv(path)
+
 # show some information about the data
 pet_data.shape
 pet_data.head()
 pet_data.describe()
 pet_data.info()
+
+# drop unwanted columns
+pet_data.drop(columns=["Intake Type", "Impound Number", "Kennel Number", "Animal ID", "Intake Date", "Outcome Date", "Days in Shelter", "Name", "Date Of Birth"], axis=1, inplace=True)
+
+# only want cats and dogs
+pet_data = pet_data.loc[(pet_data["Type"] == "CAT") | (pet_data["Type"] == "DOG")]
 
 # list null values
 print(pet_data.isna().sum())
@@ -24,22 +37,25 @@ print(pet_data.isna().sum())
 pet_data = pet_data.dropna()
 
 
+pet_data[['Type', 'Breed', 'Color', 'Sex', 'Size', 'Intake Condition', 'Outcome Type']] = pet_data[['Type', 'Breed', 'Color', 'Sex', 'Size', 'Intake Condition', 'Outcome Type']].astype(str)
 
-pet_data[['Type', 'Breed', 'Color', 'Sex', 'Size', 'Intake Type', 'Intake Condition', 'Outcome Type']] = pet_data[['Type', 'Breed', 'Color', 'Sex', 'Size', 'Intake Type', 'Intake Condition', 'Outcome Type']].astype(str)
 
-pet_data.drop(columns=["Intake Type"], axis=1, inplace=True)
+# CLEANUP: Age
+# Some animals have incorrect age (very large numbers) -> replace outliers w median age
+
+median = pet_data.loc[pet_data['Age'] <= 23, 'Age'].median()
+pet_data["Age"] = np.where(pet_data["Age"] > 23, median, pet_data["Age"])
 
 
 # We will need to standardize the Breed and Color of pets, since there are hundreds of different types. 
 # Also rename/combine some types from Sex, Size, etc
-
-pet_data.nunique()
 
 # CLEANUP: combine 'unknown' with 'healthy'
 pet_data['Intake Condition'] = pet_data['Intake Condition'].str.replace("UNKNOWN", "HEALTHY")
 
 
 pet_data['Outcome Type'].value_counts()
+
 # CLEANUP: remove rows that were 'return to owner', 'escaped/stolen', then combined everything that's NOT adoption into one 
 
 indexOutcomes = pet_data[(pet_data['Outcome Type'] == "RETURN TO OWNER") | (pet_data['Outcome Type'] == "ESCAPED/STOLEN")| (pet_data['Outcome Type'] == "TRANSFER") ].index
@@ -47,12 +63,9 @@ pet_data.drop(indexOutcomes, inplace=True)
 pet_data['Outcome Type'] = pet_data['Outcome Type'].str.replace("DIED|DISPOSAL", "EUTHANIZE")
 
 
-
 pet_data['Size'].value_counts()
 # combine kittens and puppies
 pet_data['Size'] = pet_data['Size'].str.replace("KITTN|PUPPY", "KITTN OR PUPPY")
-
-
 
 
 ## CLEANUP: Standardize colors 
@@ -164,7 +177,7 @@ pet_data.loc[:100, ['First Breed', 'Second Breed']]
 pet_data.replace("Spayed", "Female", inplace=True)
 pet_data.replace("Neutered", "Male", inplace=True)
 
-
+print(pet_data.nunique())
 # ---------------------------------------
 # Encoding categorical variables to numerical dummy variables for the model
 
@@ -198,7 +211,7 @@ pet_data.groupby(by=['Type']).count()
 # after cleaning, we have 3271 cats and 3335 dogs in the dataset
 
 pet_data.groupby(by=['Outcome Type']).count()
-# approximately a 5:1 ratio of adopted:euthanize outcome
+# approximately a 5:2 ratio of adopted:euthanize outcome
 
 # save the cleaned dataset for future use
 pet_data.to_csv('cleaned_df.csv')
@@ -229,6 +242,7 @@ coef1 = np.negative(coef)
 # get feature names
 feature_names = clf.named_steps['preprocessor'].transformers_[1][1].named_steps['onehot'].get_feature_names()
 feature_names = np.insert(feature_names, 0, "Age")
+
 # export coefficients to df and csv file
 coef_df = pd.DataFrame({'coef':coef1, 'feature':feature_names})
 coef_df = coef_df.sort_values(by='coef')
@@ -241,7 +255,6 @@ coef_df.to_csv('coefficients.csv')
 y_test1 = pd.get_dummies(y_test, drop_first=True)
 y_pred1 = pd.DataFrame(y_pred)
 y_pred2 = pd.get_dummies(y_pred1, drop_first=True)
-
 
 # Confusion Matrix
 from sklearn.metrics import confusion_matrix
@@ -266,7 +279,7 @@ plt.xlabel('False Positive Rate')
 plt.ylabel('True Positive Rate')
 plt.title('Receiver operating characteristic')
 plt.legend(loc="lower right")
-#plt.savefig('Log_ROC')
+plt.savefig('LogReg_ROC')
 
 # Learning Curves
 from sklearn.model_selection import learning_curve
@@ -321,7 +334,6 @@ print('Average precision-recall score: {0:0.2f}'.format(
 
 precision, recall, _ = precision_recall_curve(y_test1, y_pred2)
 
-# In matplotlib < 1.5, plt.fill_between does not have a 'step' argument
 step_kwargs = ({'step': 'post'}
                if 'step' in signature(plt.fill_between).parameters
                else {})
@@ -335,7 +347,7 @@ plt.ylim([0.0, 1.05])
 plt.xlim([0.0, 1.0])
 plt.title('2-class Precision-Recall curve: Avg Prec={0:0.2f}'.format(
           average_precision))
-#plt.savefig('pr_curve')
+plt.savefig('pr_curve')
 
 
 
