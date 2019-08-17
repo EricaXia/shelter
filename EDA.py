@@ -41,6 +41,16 @@ euthanized["Intake Condition"].value_counts(normalize=True)
 
 euthanized[euthanized["Intake Condition"] == "HEALTHY"].shape
 
+
+# countplots
+plt.title("Outcome Type")
+flat_ui=["#2ecc71", "#34495e"]
+sns.countplot("Outcome Type", data=pet_data, palette=flat_ui)
+
+plt.title("Outcome Type by Intake Condition")
+sns.countplot(x="Outcome Type", hue="Intake Condition", data=pet_data)
+
+
 # Age distribution
 plt.title('Age Distribution')
 sns.distplot(pet_data["Age"])
